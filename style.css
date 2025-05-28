@@ -25,7 +25,7 @@ html, body {
   flex: 2 1 60%;
   overflow: auto;
   display: grid;
-  grid-template-columns: repeat(14, 32px);
+  grid-template-columns: repeat(16, 32px);
   grid-template-rows: repeat(20, 32px);
   background: transparent;
   border: none;
