@@ -1,12 +1,13 @@
-// --- YOUR LATEST GRID ---
+// --- YOUR LATEST 16x20 GRID ---
+// Make sure each row has 16 cells (dots or letters), separated by spaces!
 const gridText = [
   ". . . . . . . . . . A N U P A M",
   ". . C . . . . . . . M . . . . .",
-  ". . H . B A A D S H A H . . . .", 
+  ". . H . B A A D S H A H . . . .",
   ". J U H I . . . . . N . . . . .",
   ". . N . L O N D O N . . . . . .",
   ". . N . L . . . . . . . . . . .",
-  ". . I . U . . . . M A N O J . .", 
+  ". . I . U . . . . M A N O J . .",
   ". . . . B . . . . . . . N . . .",
   ". S . . A . G . . P R I E T Y .",
   "K A V E R I A M M A . . T . . .",
@@ -22,34 +23,35 @@ const gridText = [
   ". . . . H E Y R A M . . . . . ."
 ];
 
-const grid = gridText.map(row => row.split(/\s+/));
-const ROWS = grid.length;
-const COLS = grid[0].length;
+// Parse grid as 16x20
+const grid = gridText.map(row => row.trim().split(/\s+/));
+const ROWS = 20;
+const COLS = 16;
 
-// --- CLUES (final, matching your grid) ---
+// --- CLUES (edit as needed to match your grid) ---
 const cluesList = [
   // Across
-  ["ANUPAM", "Actor who plays his father when he's raj, and again when he's kishanlal (6)"],
+  ["ANUPAM", "actor who plays his father when he's raj, and again when he's kishanlal (6)"],
   ["CHUNNI", "\"apne hisse ki zindagi toh hum jee chuke______ Babu, (6)"],
-  ["BAADSHAH", "Film where he throws walnut on mirror to prove he's not in love (8)"],
-  ["JUHI", "When he doesn't end up with anna, this actress makes a cameo at the end (4)"],
-  ["LONDON", "Maya, aka Pooja’s fiancé, lives here (6)"],
-  ["MANOJ", "Zaara's fiance; the actor (5)"],
-  ["PRIETY", "When he's Amar they almost get married, as Dev they're getting divorced; the actress (6)"],
-  ["KAVERIAMMA", "Mohan has come to india after many years for her (6,4)"],
-  ["KTV", "As Ajay Bakshi, he works for this channel (3)"],
-  ["SAGARIKA", "Actress who plays Preeti Sabarwal, and actually married a cricketer IRL (7)"],
-  ["HEYRAM", "His Tamil debut (6)"],
+  ["BAADSHAH", "film where he throws walnut on mirror to prove he's not in love (8)"],
+  ["JUHI", "when he doesn't end up with anna, this actress makes a cameo at the end (4)"],
+  ["LONDON", "maya, aka pooja’s fiancé, lives here (6)"],
+  ["MANOJ", "zaara's fiance; the actor (5)"],
+  ["PRIETY", "when he's amar they almost get married, as dev they're getting divorced; the actress (6)"],
+  ["KAVERIAMMA", "mohan has come to india after many years for her (6,4)"],
+  ["KTV", "as ajay bakshi, he works for this channel (3)"],
+  ["SAGARIKA", "actress who plays preeti sabarwal, and actually married a cricketer IRL (7)"],
+  ["HEYRAM", "his Tamil debut (6)"],
   // Down
-  ["AMAN", "As this character he says 'yeh woh geeta nahi hai jiske do gande gande bache hai?' (4)"],
-  ["PAHELI", "Sunil Shetty is his absent brother in this film (6)"],
-  ["BILLUBARBER", "Remake of a Malayalam film, loosely based on krishna and sudama (5,6)"],
-  ["ONETWOKAFOUR", "Osaka moraiya film (3,3,2,4)"],
-  ["AMRITA", "General bakshi sends him to darjeeling to protect her; the actress (6)"],
-  ["SAATHIYA", "He plays Tabu's husband in this film (8)"],
-  ["GANGA", "His 'mehbooba', who shares her name with a river (5)"],
-  ["AKIRA", "She meets Samar in Ladakh as a Discovery channel film-maker; character name (5)"],
-  ["GREECE", "He follows priya to this country because he didn't want to say 'kaash' (6)"]
+  ["AMAN", "as this character he says 'yeh woh geeta nahi hai jiske do gande gande bache hai?' (4)"],
+  ["PAHELI", "sunil shetty is his absent brother in this film (6)"],
+  ["BILLUBARBER", "remake of a Malayalam film, loosely based on krishna and sudama (5,6)"],
+  ["ONETWOKAFOUR", "osaka moraiya movie (3,3,2,4)"],
+  ["AMRITA", "general bakshi sends him to darjeeling to protect her; the actress (6)"],
+  ["SAATHIYA", "he plays tabu's husband in this film (8)"],
+  ["GANGA", "his 'mehbooba', who shares her name with a river (5)"],
+  ["GREECE", "he follows priya to this country because he didn't want to say 'kaash' (6)"],
+  ["AKIRA", "taani partner actress plays this character in Ladakh (5)"]
 ];
 
 // --- AUTO-DETECT WORDS IN GRID ---
