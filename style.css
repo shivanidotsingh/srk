@@ -25,8 +25,8 @@ html, body {
   flex: 2 1 60%;
   overflow: auto;
   display: grid;
-  grid-template-columns: repeat(14, 32px); /* Adjusted for 14 columns */
-  grid-template-rows: repeat(20, 32px); /* Adjusted for 20 rows */
+  grid-template-columns: repeat(14, 32px);
+  grid-template-rows: repeat(20, 32px);
   background: transparent;
   border: none;
 }
@@ -34,8 +34,8 @@ html, body {
 .cell {
   width: 32px; height: 32px;
   text-align: center; font-size: 18px; font-weight: bold;
-  background: transparent;
-  border: none;
+  background: #fff;
+  border: 1px solid #bbb; /* Light grid lines */
   outline: none; position: relative;
   box-sizing: border-box;
   padding: 0 0 0 12px;
@@ -43,12 +43,6 @@ html, body {
   text-transform: uppercase;
   caret-color: #1976d2;
   transition: background 0.15s;
-}
-
-.cell:not(.block) {
-  background: #fff;
-  border-radius: 4px;
-  box-shadow: 0 1px 2px rgba(60,60,60,0.09);
 }
 
 .cell.block {
