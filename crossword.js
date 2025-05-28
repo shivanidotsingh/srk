@@ -98,33 +98,34 @@ const {across, down, numbering} = findWordsAndNumbering();
 
 // --- RENDER GRID ---
 const crossword = document.getElementById('crossword');
-const cellRefs = [];
 for (let r = 0; r < ROWS; r++) {
-  cellRefs[r] = [];
   for (let c = 0; c < COLS; c++) {
     const ch = grid[r][c];
-    const cell = document.createElement('input');
-    cell.type = 'text';
-    cell.maxLength = 1;
-    cell.className = 'cell' + (ch === '.' ? ' block' : '');
-    cell.disabled = ch === '.';
-    cell.dataset.row = r;
-    cell.dataset.col = c;
-    cell.value = '';
-    crossword.appendChild(cell);
-    cellRefs[r][c] = cell;
+    const cellDiv = document.createElement('div');
+    cellDiv.className = 'cell' + (ch === '.' ? ' block' : '');
+    cellDiv.style.position = 'relative';
+
+    if (ch !== ".") {
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.maxLength = 1;
+      input.className = 'cell-input';
+      input.disabled = false;
+      input.dataset.row = r;
+      input.dataset.col = c;
+      cellDiv.appendChild(input);
+    }
+
     // Add clue number if this cell starts a word
     const num = numbering[r][c];
     if (num) {
       const span = document.createElement('span');
       span.className = 'cell-number';
       span.textContent = num;
-      cell.insertAdjacentElement('afterbegin', span);
+      cellDiv.appendChild(span);
     }
-    cell.addEventListener('focus', onCellFocus);
-    cell.addEventListener('keydown', onCellKeyDown);
-    cell.addEventListener('input', onCellInput);
-    cell.addEventListener('click', onCellClick);
+
+    crossword.appendChild(cellDiv);
   }
 }
 
