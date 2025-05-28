@@ -30,7 +30,7 @@ const COLS = 16;
 
 const cluesList = [
   // Across
-  ["ANUPAM", "Actor who plays his father when he's Raj, and again when he's Kishanlal (6)"],
+  ["ANUPAM", "Father who he greets with 'O Potchi, O Koka, O Bobi, O Lola.'; the actor (6)"],
   ["CHUNNI", "\"Apne hisse ki zindagi toh hum jee chuke______ Babu,\" (6)"],
   ["BAADSHAH", "Film where he throws walnut on mirror to prove he's not in love (8)"],
   ["JUHI", "When he doesn't end up with Anna, this actress makes a cameo at the end (4)"],
