@@ -31,27 +31,27 @@ const COLS = 16;
 // --- CLUES (edit as needed to match your grid) ---
 const cluesList = [
   // Across
-  ["ANUPAM", "actor who plays his father when he's raj, and again when he's kishanlal (6)"],
-  ["CHUNNI", "\"apne hisse ki zindagi toh hum jee chuke______ Babu, (6)"],
-  ["BAADSHAH", "film where he throws walnut on mirror to prove he's not in love (8)"],
-  ["JUHI", "when he doesn't end up with anna, this actress makes a cameo at the end (4)"],
-  ["LONDON", "maya, aka pooja’s fiancé, lives here (6)"],
-  ["MANOJ", "zaara's fiance; the actor (5)"],
-  ["PRIETY", "when he's amar they almost get married, as dev they're getting divorced; the actress (6)"],
-  ["KAVERIAMMA", "mohan has come to india after many years for her (6,4)"],
-  ["KTV", "as ajay bakshi, he works for this channel (3)"],
-  ["SAGARIKA", "actress who plays preeti sabarwal, and actually married a cricketer IRL (7)"],
-  ["HEYRAM", "his Tamil debut (6)"],
+  ["ANUPAM", "Actor who plays his father when he's Raj, and again when he's Kishanlal (6)"],
+  ["CHUNNI", "\"Apne hisse ki zindagi toh hum jee chuke ______ Babu\" (6)"],
+  ["BAADSHAH", "Film where he throws walnut on mirror to prove he's not in love (8)"],
+  ["JUHI", "When he doesn't end up with Anna, this actress makes a cameo at the end (4)"],
+  ["LONDON", "Maya, aka Pooja’s fiancé, lives here (6)"],
+  ["MANOJ", "Zaara's fiancé; the actor (5)"],
+  ["PRIETY", "When he's Amar they almost get married, as Dev they're getting divorced; the actress (6)"],
+  ["KAVERIAMMA", "Mohan has come to India after many years for her (6,4)"],
+  ["KTV", "As Ajay Bakshi, he works for this channel (3)"],
+  ["SAGARIKA", "Actress who plays Preeti Sabarwal, and actually married a cricketer IRL (7)"],
+  ["HEYRAM", "His Tamil debut (6)"],
   // Down
-  ["AMAN", "as this character he says 'yeh woh geeta nahi hai jiske do gande gande bache hai?' (4)"],
-  ["PAHELI", "sunil shetty is his absent brother in this film (6)"],
-  ["BILLUBARBER", "remake of a Malayalam film, loosely based on krishna and sudama (5,6)"],
-  ["ONETWOKAFOUR", "osaka moraiya movie (3,3,2,4)"],
-  ["AMRITA", "general bakshi sends him to darjeeling to protect her; the actress (6)"],
-  ["SAATHIYA", "he plays tabu's husband in this film (8)"],
-  ["GANGA", "his 'mehbooba', who shares her name with a river (5)"],
-  ["GREECE", "he follows priya to this country because he didn't want to say 'kaash' (6)"],
-  ["AKIRA", "taani partner actress plays this character in Ladakh (5)"]
+  ["AMAN", "As this character he says 'Yeh woh Geeta nahi hai jiske do gande gande bache hai?' (4)"],
+  ["PAHELI", "Sunil Shetty is his absent brother in this film (6)"],
+  ["BILLUBARBER", "Remake of a Malayalam film, loosely based on Krishna and Sudama (5,6)"],
+  ["ONETWOKAFOUR", "Osaka Moraiya movie (3,3,2,4)"],
+  ["AMRITA", "General Bakshi sends him to Darjeeling to protect her; the actress (6)"],
+  ["SAATHIYA", "He plays Tabu's husband in this film (8)"],
+  ["GANGA", "His 'Mehbooba', who shares her name with a river (5)"],
+  ["GREECE", "He follows Priya to this country because he didn't want to say 'Kaash' (6)"],
+  ["AKIRA", "Taani partner actress plays this character in Ladakh (5)"]
 ];
 
 // --- AUTO-DETECT WORDS IN GRID ---
