@@ -20,7 +20,7 @@ const gridText = [
   ". . . . E . . K . . . . U . . .",
   ". . . . E . . I . . A M R I T A",
   ". . . . C . . R . . . . . . . .",
-  ". . . . H E Y R A M . . . . . ."
+  ". . . H E Y R A M . . . . . . ."
 ];
 
 // Parse grid as 16x20
