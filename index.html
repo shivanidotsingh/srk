@@ -1,440 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>SRK Verse Crossword</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background: white; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .content { display: flex; gap: 20px; padding: 20px; }
-        .crossword-container { flex: 2; display: flex; justify-content: center; align-items: flex-start; }
-        .crossword-grid {
-            display: grid;
-            grid-template-columns: repeat(15, 30px);
-            grid-template-rows: repeat(15, 30px);
-            gap: 1px;
-            background-color: #ddd;
-            padding: 5px;
-        }
-        .cell {
-            width: 30px; height: 30px; background: #ddd; border: 1px solid #ccc;
-            text-align: center; font-size: 12px; font-weight: bold; position: relative; outline: none;
-        }
-        .cell.active { background: white; color: black; }
-        .cell.highlighted { background: #f0f0f0; }
-        .cell.current { background: #e0e0e0; }
-        .cell-number {
-            position: absolute; top: 1px; left: 2px; font-size: 8px; color: #666; pointer-events: none;
-        }
-        .clues-container { flex: 1; background: #f8f9fa; border-radius: 8px; padding: 20px; max-height: 600px; overflow-y: auto; }
-        .clues-section { margin-bottom: 30px; }
-        .clues-section h3 { color: #1e3c72; border-bottom: 2px solid #1e3c72; padding-bottom: 5px; margin-bottom: 15px; }
-        .clue { margin-bottom: 10px; padding: 8px; background: white; border-radius: 5px; cursor: pointer; transition: all 0.3s ease; }
-        .clue:hover { background: #e3f2fd; transform: translateX(5px); }
-        .clue.active { background: #2196F3; color: white; }
-        .clue-number { font-weight: bold; color: #1e3c72; }
-        .clue.active .clue-number { color: white; }
-        .controls { text-align: center; margin-top: 20px; }
-        .btn {
-            background: #333; color: white; border: 1px solid #333;
-            padding: 8px 16px; cursor: pointer; margin: 0 5px; font-size: 14px;
-        }
-        .btn:hover { background: #555; }
-        .status { text-align: center; margin-top: 15px; font-size: 18px; font-weight: bold; }
-        .success { color: #4CAF50; }
-        @media (max-width: 768px) {
-            .content { flex-direction: column; }
-            .crossword-grid {
-                grid-template-columns: repeat(15, 25px);
-                grid-template-rows: repeat(15, 25px);
-            }
-            .cell { width: 25px; height: 25px; font-size: 10px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>SRK Crossword</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f8f8f8; }
+    .container { max-width: 1200px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 10px; }
+    .flex { display: flex; gap: 40px; }
+    .crossword-grid { display: grid; grid-template-columns: repeat(16, 32px); grid-template-rows: repeat(19, 32px); gap: 1px; background: #bbb; }
+    .cell { width: 32px; height: 32px; text-align: center; font-size: 18px; font-weight: bold; background: #fff; border: none; outline: none; position: relative; }
+    .cell.block { background: #222; }
+    .cell-number { position: absolute; top: 2px; left: 4px; font-size: 10px; color: #666; pointer-events: none; }
+    .cell.highlight { background: #e3f2fd; }
+    .cell.current { background: #bbdefb; }
+    .clues { flex: 1; }
+    .clues-section { margin-bottom: 25px; }
+    .clues-section h3 { margin-bottom: 8px; color: #1976d2; }
+    .clue { margin-bottom: 8px; cursor: pointer; border-radius: 4px; padding: 5px 8px; }
+    .clue.active { background: #1976d2; color: #fff; }
+    .controls { margin-top: 25px; text-align: center; }
+    .btn { margin: 0 6px; padding: 7px 18px; background: #1976d2; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+    .btn:hover { background: #0d47a1; }
+    .status { margin-top: 18px; font-size: 18px; text-align: center; }
+    @media (max-width: 900px) { .flex { flex-direction: column; } }
+  </style>
 </head>
 <body>
 <div class="container">
-    <div class="content">
-        <div class="crossword-container">
-            <div class="crossword-grid" id="crosswordGrid"></div>
-        </div>
-        <div class="clues-container">
-            <div class="clues-section">
-                <h3>Across</h3>
-                <div id="acrossClues"></div>
-            </div>
-            <div class="clues-section">
-                <h3>Down</h3>
-                <div id="downClues"></div>
-            </div>
-        </div>
+  <div class="flex">
+    <div>
+      <div class="crossword-grid" id="crossword"></div>
+      <div class="controls">
+        <button class="btn" onclick="clearGrid()">Clear</button>
+        <button class="btn" onclick="checkAnswers()">Check</button>
+        <button class="btn" onclick="revealAnswers()">Reveal</button>
+      </div>
+      <div class="status" id="status"></div>
     </div>
-    <div class="controls">
-        <button class="btn" onclick="clearGrid()">Clear Grid</button>
-        <button class="btn" onclick="checkAnswers()">Check Answers</button>
-        <button class="btn" onclick="revealAnswers()">Reveal Answers</button>
+    <div class="clues">
+      <div class="clues-section">
+        <h3>Across</h3>
+        <div id="acrossClues"></div>
+      </div>
+      <div class="clues-section">
+        <h3>Down</h3>
+        <div id="downClues"></div>
+      </div>
     </div>
-    <div class="status" id="status"></div>
+  </div>
 </div>
 <script>
-const GRID_SIZE = 15;
+// Grid from your file
+const gridText = [
+  ". . . . . . . . . . A N U P A M",
+  ". . . . . . . . . . M . . . . .",
+  ". . . . B A A D S H A H . . . .",
+  ". . . . I . . . . . N . . . . .",
+  ". . . . L O N D O N . . . . . .",
+  ". . . . L . . . . . . . . . . .",
+  ". . . J U G . . . M A N O J . .",
+  ". . . . B . . . . . . . N . . .",
+  ". S . . A . . A . P R I E T Y .",
+  "K A V E R I A M M A . . T . . .",
+  ". A . . B . . R . H . . W . . .",
+  ". T . . E . . I . E . . O . . .",
+  ". H . . R . . T . L . . K T V .",
+  ". I . . . . . A K I R A A . . J",
+  ". Y . G . . . . . . . . F . . .",
+  "S A G A R I K A . . . . O . . .",
+  ". . . N . . . . . . C H U N N I",
+  ". . . G R E E C E . . . R . . .",
+  ". . . . A . . . . . . . . . . ."
+];
 
-// Clues and answers
-const crosswordData = {
-    clues: {
-        across: {
-            2: "his 'mehbooba', who shares her name with a river (5)",
-            4: "maya, aka pooja, goes on a short trip here with fiancé, title song plays (9)",
-            7: "remake of a Malayalam film, loosely based on krishna and sudama (5,6)",
-            10: "mohan has come to india after many years for her (6,4)",
-            14: "he plays tabu's husband in this film (8)",
-            16: "actor who plays pappu master, Omi's best friend (7)",
-            17: "as ajay bakshi, he works for this channel (3)",
-            18: "taani partner actress plays this character in Ladakh(5)",
-            20: "zaara's fiance; the actor (5)",
-            21: "apne hisse ki zindagi toh hum jee chuke ______ ____, ab toh bus dhadkano ka lihaaz karte hai (6,4)"
-        },
-        down: {
-            1: "sunil shetty is his absent brother in this film (6)",
-            3: "he follows priya to this country because he didn't want to say 'kaash' (6)",
-            5: "when he doesn't end up with anna, this actress makes a cameo at the end (4)",
-            6: "actress who plays preeti sabarwal, and actually married a cricketer IRL (7)",
-            8: "film where he throws walnut on mirror to prove he's not in love (8)",
-            9: "osaka moraiya movie (3,3,2,4)",
-            11: "actor who plays his father when he's raj, and again when he's kishanlal (6)",
-            12: "general bakshi sends him to darjeeling to protect her; the actress (6,3)",
-            15: "when he's amar they almost get married, as dev they're getting divorced; the actress (6)",
-            19: "as this character he says 'yeh woh geeta nahi hai jiske do gande gande bache hai?' (4)"
-        }
-    }
+// Parse grid into 2D array
+const grid = gridText.map(row => row.split(/\s+/));
+const ROWS = grid.length;
+const COLS = grid[0].length;
+
+// Numbering and word positions from code result[1]
+const numbering = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 4, 0, 0, 0, 0, 0, 5, 0, 0, 6, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 7, 0, 0, 0, 0, 0, 8, 0, 9, 0, 0, 0, 0, 0, 0],
+  [10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0],
+  [0, 0, 0, 16, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+];
+
+// Across and Down words and clues from code result[1]
+const acrossWords = {
+  1: {row: 0, col: 10, answer: 'ANUPAM'},
+  2: {row: 2, col: 4, answer: 'BAADSHAH'},
+  3: {row: 4, col: 4, answer: 'LONDON'},
+  4: {row: 6, col: 3, answer: 'JUG'},
+  5: {row: 6, col: 9, answer: 'MANOJ'},
+  9: {row: 8, col: 9, answer: 'PRIETY'},
+  10: {row: 9, col: 0, answer: 'KAVERIAMMA'},
+  11: {row: 12, col: 12, answer: 'KTV'},
+  12: {row: 13, col: 7, answer: 'AKIRAA'},
+  14: {row: 15, col: 0, answer: 'SAGARIKA'},
+  15: {row: 16, col: 10, answer: 'CHUNNI'},
+  16: {row: 17, col: 3, answer: 'GREECE'}
+};
+const downWords = {
+  7: {row: 8, col: 1, answer: 'SAATHIYA'},
+  13: {row: 14, col: 3, answer: 'GANG'},
+  2: {row: 2, col: 4, answer: 'BILLUBARBER'},
+  17: {row: 17, col: 4, answer: 'RA'},
+  8: {row: 8, col: 7, answer: 'AMRITA'},
+  9: {row: 8, col: 9, answer: 'PAHELI'},
+  1: {row: 0, col: 10, answer: 'AMAN'},
+  6: {row: 6, col: 12, answer: 'ONETWOKAFOUR'}
+};
+const acrossClues = {
+  1: "actor who plays his father when he's raj, and again when he's kishanlal",
+  2: "film where he throws walnut on mirror to prove he's not in love",
+  3: "maya, aka pooja’s fiancé, lives here",
+  4: "as this character, he makes a parallel between choosing a kursi and choosing a life partner",
+  5: "zaara's fiance; the actor",
+  9: "when he's amar they almost get married, as dev they're getting divorced; the actress",
+  10: "mohan has come to india after many years for her",
+  11: "as ajay bakshi, he works for this channel",
+  12: "",
+  14: "actress who plays preeti sabarwal, and actually married a cricketer IRL",
+  15: "\"apne hisse ki zindagi toh hum jee chuke______ Babu,",
+  16: "he follows priya to this country because he didn't want to say 'kaash'"
+};
+const downClues = {
+  7: "he plays tabu's husband in this film",
+  13: "",
+  2: "remake of a Malayalam film, loosely based on krishna and sudama",
+  17: "",
+  8: "general bakshi sends him to darjeeling to protect her; the actress",
+  9: "sunil shetty is his absent brother in this film",
+  1: "as this character he says 'yeh woh geeta nahi hai jiske do gande gande bache hai?'",
+  6: "osaka moraiya movie"
 };
 
-// Logical, intersecting word placements (row, col, direction, length, answer)
-const wordPlacements = {
-    // Across
-    2:  {row: 1, col: 1, dir: 'across', length: 5, answer: 'GANGA'},
-    4:  {row: 3, col: 1, dir: 'across', length: 9, answer: 'SINGAPORE'},
-    7:  {row: 5, col: 0, dir: 'across', length: 11, answer: 'BILLUBARBER'},
-    10: {row: 7, col: 2, dir: 'across', length: 10, answer: 'KAVERIAMMA'},
-    14: {row: 9, col: 3, dir: 'across', length: 8, answer: 'SAATHIYA'},
-    16: {row: 11, col: 6, dir: 'across', length: 7, answer: 'SHREYAS'},
-    17: {row: 13, col: 0, dir: 'across', length: 3, answer: 'KTV'},
-    18: {row: 13, col: 5, dir: 'across', length: 5, answer: 'AKIRA'},
-    20: {row: 13, col: 11, dir: 'across', length: 5, answer: 'MANOJ'},
-    21: {row: 14, col: 2, dir: 'across', length: 10, answer: 'CHUNNIBABU'},
-    // Down
-    1:  {row: 0, col: 1, dir: 'down', length: 6, answer: 'PAHELI'},
-    3:  {row: 1, col: 3, dir: 'down', length: 6, answer: 'GREECE'},
-    5:  {row: 2, col: 5, dir: 'down', length: 4, answer: 'JUHI'},
-    6:  {row: 3, col: 7, dir: 'down', length: 7, answer: 'SAGRIKA'},
-    8:  {row: 5, col: 9, dir: 'down', length: 8, answer: 'BAADSHAH'},
-    9:  {row: 0, col: 11, dir: 'down', length: 13, answer: 'ONETWOKAFOUR'},
-    11: {row: 7, col: 6, dir: 'down', length: 6, answer: 'ANUPAM'},
-    12: {row: 2, col: 8, dir: 'down', length: 9, answer: 'AMRITARAO'},
-    15: {row: 9, col: 4, dir: 'down', length: 6, answer: 'PRIETY'},
-    19: {row: 12, col: 7, dir: 'down', length: 4, answer: 'AMAN'}
-};
-
-let currentCell = null;
-let currentWord = null;
-let currentDirection = 'across';
-
-function initializeGrid() {
-    const grid = document.getElementById('crosswordGrid');
-    // Clear previous grid
-    grid.innerHTML = '';
-    // Create cells
-    for (let row = 0; row < GRID_SIZE; row++) {
-        for (let col = 0; col < GRID_SIZE; col++) {
-            const cell = document.createElement('input');
-            cell.className = 'cell';
-            cell.maxLength = 1;
-            cell.id = `cell-${row}-${col}`;
-            cell.disabled = true;
-            cell.addEventListener('input', handleCellInput);
-            cell.addEventListener('click', handleCellClick);
-            cell.addEventListener('keydown', handleKeyDown);
-            grid.appendChild(cell);
-        }
+// Build grid
+const crossword = document.getElementById('crossword');
+const cellRefs = [];
+for (let r = 0; r < ROWS; r++) {
+  cellRefs[r] = [];
+  for (let c = 0; c < COLS; c++) {
+    const ch = grid[r][c];
+    const cell = document.createElement('input');
+    cell.type = 'text';
+    cell.maxLength = 1;
+    cell.className = 'cell' + (ch === '.' ? ' block' : '');
+    cell.disabled = ch === '.';
+    cell.dataset.row = r;
+    cell.dataset.col = c;
+    cell.value = '';
+    crossword.appendChild(cell);
+    cellRefs[r][c] = cell;
+    // Add number if this cell starts a word
+    const num = numbering[r]?.[c] || 0;
+    if (num) {
+      const span = document.createElement('span');
+      span.className = 'cell-number';
+      span.textContent = num;
+      cell.insertAdjacentElement('afterbegin', span);
     }
-    // Mark active cells and add numbers
-    const numbered = {};
-    Object.entries(wordPlacements).forEach(([num, placement]) => {
-        const {row, col, dir, length} = placement;
-        for (let i = 0; i < length; i++) {
-            const cellRow = dir === 'across' ? row : row + i;
-            const cellCol = dir === 'across' ? col + i : col;
-            if (cellRow < GRID_SIZE && cellCol < GRID_SIZE) {
-                const cell = document.getElementById(`cell-${cellRow}-${cellCol}`);
-                cell.classList.add('active');
-                cell.disabled = false;
-            }
-        }
-        // Add number to starting cell (only if not already numbered)
-        const key = `${row},${col}`;
-        if (!numbered[key]) {
-            const startCell = document.getElementById(`cell-${row}-${col}`);
-            if (startCell) {
-                const numberSpan = document.createElement('span');
-                numberSpan.className = 'cell-number';
-                numberSpan.textContent = num;
-                startCell.appendChild(numberSpan);
-                numbered[key] = true;
-            }
-        }
-    });
-    // Initialize clues
-    initializeClues();
+  }
 }
 
-function initializeClues() {
-    const acrossContainer = document.getElementById('acrossClues');
-    const downContainer = document.getElementById('downClues');
-    acrossContainer.innerHTML = '';
-    downContainer.innerHTML = '';
-    Object.entries(crosswordData.clues.across).forEach(([num, clue]) => {
-        const clueDiv = document.createElement('div');
-        clueDiv.className = 'clue';
-        clueDiv.innerHTML = `<span class="clue-number">${num}.</span> ${clue}`;
-        clueDiv.onclick = () => selectWord(num, 'across');
-        acrossContainer.appendChild(clueDiv);
-    });
-    Object.entries(crosswordData.clues.down).forEach(([num, clue]) => {
-        const clueDiv = document.createElement('div');
-        clueDiv.className = 'clue';
-        clueDiv.innerHTML = `<span class="clue-number">${num}.</span> ${clue}`;
-        clueDiv.onclick = () => selectWord(num, 'down');
-        downContainer.appendChild(clueDiv);
-    });
+// Render clues
+function renderClues() {
+  const acrossDiv = document.getElementById('acrossClues');
+  const downDiv = document.getElementById('downClues');
+  acrossDiv.innerHTML = '';
+  downDiv.innerHTML = '';
+  Object.entries(acrossClues).forEach(([num, clue]) => {
+    if (clue)
+      acrossDiv.innerHTML += `<div class="clue"><b>${num}.</b> ${clue}</div>`;
+  });
+  Object.entries(downClues).forEach(([num, clue]) => {
+    if (clue)
+      downDiv.innerHTML += `<div class="clue"><b>${num}.</b> ${clue}</div>`;
+  });
 }
+renderClues();
 
-function selectWord(num, direction) {
-    document.querySelectorAll('.cell').forEach(cell => {
-        cell.classList.remove('highlighted', 'current');
-    });
-    document.querySelectorAll('.clue').forEach(clue => {
-        clue.classList.remove('active');
-    });
-    const placement = wordPlacements[num];
-    if (!placement || placement.dir !== direction) return;
-    currentWord = num;
-    currentDirection = direction;
-    const {row, col, length} = placement;
-    for (let i = 0; i < length; i++) {
-        const cellRow = direction === 'across' ? row : row + i;
-        const cellCol = direction === 'across' ? col + i : col;
-        if (cellRow < GRID_SIZE && cellCol < GRID_SIZE) {
-            const cell = document.getElementById(`cell-${cellRow}-${cellCol}`);
-            cell.classList.add('highlighted');
-            if (i === 0) {
-                cell.classList.add('current');
-                cell.focus();
-                currentCell = cell;
-            }
-        }
-    }
-    // Highlight active clue
-    const clueList = Object.keys(crosswordData.clues[direction]);
-    const clueIndex = clueList.indexOf(num);
-    if (clueIndex !== -1) {
-        document.querySelectorAll(`#${direction}Clues .clue`)[clueIndex].classList.add('active');
-    }
-}
-
-function handleCellClick(event) {
-    const cell = event.target;
-    if (!cell.classList.contains('active')) return;
-    const [row, col] = cell.id.split('-').slice(1).map(Number);
-    // Find words that contain this cell
-    const wordsAtCell = Object.entries(wordPlacements).filter(([num, placement]) => {
-        const {row: startRow, col: startCol, dir, length} = placement;
-        const endRow = dir === 'across' ? startRow : startRow + length - 1;
-        const endCol = dir === 'across' ? startCol + length - 1 : startCol;
-        return row >= startRow && row <= endRow && col >= startCol && col <= endCol;
-    });
-    if (wordsAtCell.length > 0) {
-        // If multiple words, toggle between them, otherwise select the word
-        let wordToSelect = wordsAtCell[0];
-        if (wordsAtCell.length > 1 && currentWord) {
-            const currentIndex = wordsAtCell.findIndex(([num]) => num == currentWord);
-            wordToSelect = wordsAtCell[(currentIndex + 1) % wordsAtCell.length];
-        }
-        const [num, placement] = wordToSelect;
-        selectWord(num, placement.dir);
-    }
-}
-
-function handleCellInput(event) {
-    const cell = event.target;
-    const value = event.target.value.toUpperCase();
-    if (value && /[A-Z]/.test(value)) {
-        cell.value = value;
-        moveToNextCell();
-    }
-}
-
-function handleKeyDown(event) {
-    const cell = event.target;
-    switch(event.key) {
-        case 'Backspace':
-            if (cell.value === '') {
-                moveToPreviousCell();
-            } else {
-                cell.value = '';
-            }
-            break;
-        case 'ArrowRight':
-            moveInDirection(0, 1);
-            break;
-        case 'ArrowLeft':
-            moveInDirection(0, -1);
-            break;
-        case 'ArrowDown':
-            moveInDirection(1, 0);
-            break;
-        case 'ArrowUp':
-            moveInDirection(-1, 0);
-            break;
-        case 'Tab':
-            event.preventDefault();
-            moveToNextWord();
-            break;
-    }
-}
-
-function moveToNextCell() {
-    if (!currentWord) return;
-    const placement = wordPlacements[currentWord];
-    const {row, col, dir, length} = placement;
-    const [currentRow, currentCol] = currentCell.id.split('-').slice(1).map(Number);
-    let nextRow = currentRow, nextCol = currentCol;
-    if (dir === 'across') {
-        nextCol++;
-        if (nextCol >= col + length) return;
-    } else {
-        nextRow++;
-        if (nextRow >= row + length) return;
-    }
-    const nextCell = document.getElementById(`cell-${nextRow}-${nextCol}`);
-    if (nextCell && nextCell.classList.contains('active')) {
-        nextCell.focus();
-        currentCell = nextCell;
-        updateCurrentHighlight();
-    }
-}
-
-function moveToPreviousCell() {
-    if (!currentWord) return;
-    const placement = wordPlacements[currentWord];
-    const {row, col, dir} = placement;
-    const [currentRow, currentCol] = currentCell.id.split('-').slice(1).map(Number);
-    let prevRow = currentRow, prevCol = currentCol;
-    if (dir === 'across') {
-        prevCol--;
-        if (prevCol < col) return;
-    } else {
-        prevRow--;
-        if (prevRow < row) return;
-    }
-    const prevCell = document.getElementById(`cell-${prevRow}-${prevCol}`);
-    if (prevCell && prevCell.classList.contains('active')) {
-        prevCell.focus();
-        currentCell = prevCell;
-        updateCurrentHighlight();
-    }
-}
-
-function moveInDirection(rowDelta, colDelta) {
-    if (!currentCell) return;
-    const [currentRow, currentCol] = currentCell.id.split('-').slice(1).map(Number);
-    const newRow = currentRow + rowDelta;
-    const newCol = currentCol + colDelta;
-    if (newRow >= 0 && newRow < GRID_SIZE && newCol >= 0 && newCol < GRID_SIZE) {
-        const newCell = document.getElementById(`cell-${newRow}-${newCol}`);
-        if (newCell && newCell.classList.contains('active')) {
-            newCell.focus();
-            currentCell = newCell;
-            // Find word at new position
-            const wordsAtCell = Object.entries(wordPlacements).filter(([num, placement]) => {
-                const {row: startRow, col: startCol, dir, length} = placement;
-                const endRow = dir === 'across' ? startRow : startRow + length - 1;
-                const endCol = dir === 'across' ? startCol + length - 1 : startCol;
-                return newRow >= startRow && newRow <= endRow && newCol >= startCol && newCol <= endCol;
-            });
-            if (wordsAtCell.length > 0) {
-                const [num, placement] = wordsAtCell[0];
-                selectWord(num, placement.dir);
-            }
-        }
-    }
-}
-
-function moveToNextWord() {
-    const allWords = Object.keys(wordPlacements).map(Number).sort((a, b) => a - b);
-    const currentIndex = allWords.indexOf(parseInt(currentWord));
-    const nextIndex = (currentIndex + 1) % allWords.length;
-    const nextWord = allWords[nextIndex];
-    const placement = wordPlacements[nextWord];
-    selectWord(nextWord, placement.dir);
-}
-
-function updateCurrentHighlight() {
-    document.querySelectorAll('.cell').forEach(cell => {
-        cell.classList.remove('current');
-    });
-    if (currentCell) {
-        currentCell.classList.add('current');
-    }
-}
-
+// Controls
 function clearGrid() {
-    document.querySelectorAll('.cell.active').forEach(cell => {
-        cell.value = '';
-    });
-    document.getElementById('status').textContent = '';
+  document.querySelectorAll('.cell').forEach(cell => { if (!cell.disabled) cell.value = ''; });
+  document.getElementById('status').textContent = '';
 }
-
 function checkAnswers() {
-    let correct = 0, total = 0;
-    Object.entries(wordPlacements).forEach(([num, placement]) => {
-        const {row, col, dir, length, answer} = placement;
-        let userAnswer = '';
-        for (let i = 0; i < length; i++) {
-            const cellRow = dir === 'across' ? row : row + i;
-            const cellCol = dir === 'across' ? col + i : col;
-            const cell = document.getElementById(`cell-${cellRow}-${cellCol}`);
-            userAnswer += cell.value || ' ';
-        }
-        total++;
-        if (userAnswer.replace(/\s/g, '') === answer.replace(/\s/g, '')) {
-            correct++;
-        }
-    });
-    const status = document.getElementById('status');
-    if (correct === total) {
-        status.innerHTML = '🎉 Congratulations! You solved the crossword! 🎉';
-        status.className = 'status success';
-    } else {
-        status.textContent = `${correct} out of ${total} words correct. Keep going!`;
-        status.className = 'status';
-    }
+  let correct = 0, total = 0;
+  Object.values(acrossWords).forEach(({row, col, answer}) => {
+    let user = '';
+    for (let i = 0; i < answer.length; i++)
+      user += cellRefs[row][col + i].value || ' ';
+    total++;
+    if (user.trim().toUpperCase() === answer.toUpperCase()) correct++;
+  });
+  Object.values(downWords).forEach(({row, col, answer}) => {
+    let user = '';
+    for (let i = 0; i < answer.length; i++)
+      user += cellRefs[row + i][col].value || ' ';
+    total++;
+    if (user.trim().toUpperCase() === answer.toUpperCase()) correct++;
+  });
+  const status = document.getElementById('status');
+  if (correct === total) {
+    status.innerHTML = '🎉 All correct! Crossword solved! 🎉';
+  } else {
+    status.textContent = `${correct} / ${total} words correct.`;
+  }
 }
-
 function revealAnswers() {
-    Object.entries(wordPlacements).forEach(([num, placement]) => {
-        const {row, col, dir, length, answer} = placement;
-        for (let i = 0; i < length; i++) {
-            const cellRow = dir === 'across' ? row : row + i;
-            const cellCol = dir === 'across' ? col + i : col;
-            const cell = document.getElementById(`cell-${cellRow}-${cellCol}`);
-            cell.value = answer[i] || '';
-        }
-    });
-    document.getElementById('status').innerHTML = '📖 All answers revealed!';
+  Object.values(acrossWords).forEach(({row, col, answer}) => {
+    for (let i = 0; i < answer.length; i++)
+      cellRefs[row][col + i].value = answer[i];
+  });
+  Object.values(downWords).forEach(({row, col, answer}) => {
+    for (let i = 0; i < answer.length; i++)
+      cellRefs[row + i][col].value = answer[i];
+  });
+  document.getElementById('status').innerHTML = '📖 All answers revealed!';
 }
-
-// Initialize the crossword when page loads
-window.addEventListener('load', initializeGrid);
 </script>
 </body>
 </html>
