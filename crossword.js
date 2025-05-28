@@ -39,7 +39,7 @@ const cluesList = [
   ["PRIETY", "When he's Amar they almost get married, as Dev they're getting divorced; the actress (6)"],
   ["KAVERIAMMA", "Mohan has come to India after many years for her (6,4)"],
   ["KTV", "As Ajay Bakshi, he works for this channel (3)"],
-  ["SAGARIKA", "Actress who plays Preeti Sabarwal, and actually married a cricketer IRL (7)"],
+  ["SAGARIKA", "Actress who plays Preeti Sabarwal, center-forward in the team Kabir is coaching (7)"],
   ["HEYRAM", "His Tamil debut (6)"],
   // Down
   ["AMAN", "As this character he says 'Yeh woh Geeta nahi hai jiske do gande gande bache hai?' (4)"],
