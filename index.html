@@ -180,12 +180,12 @@
             
             <div class="clues-container">
                 <div class="clues-section">
-                    <h3>🔄 Across</h3>
+                    <h3>Across</h3>
                     <div id="acrossClues"></div>
                 </div>
                 
                 <div class="clues-section">
-                    <h3>🔽 Down</h3>
+                    <h3>Down</h3>
                     <div id="downClues"></div>
                 </div>
             </div>
@@ -214,7 +214,6 @@
                     4: "maya, aka pooja, goes on a short trip here with fiancé, title song plays (7)",
                     7: "remake of a Malayalam film, loosely based on krishna and sudama (5,6)",
                     10: "mohan has come to india after many years for her (6,4)",
-                    13: "as this character, he makes a parallel between choosing a kursi and choosing a life partner (3)",
                     14: "he plays tabu's husband in this film (8)",
                     16: "actor who plays pappu master, Omi's best friend (7)",
                     17: "as ajay bakshi, he works for this channel (3)",
@@ -240,28 +239,27 @@
         // Word placements (row, col, direction, length, number)
         const wordPlacements = {
             // Across
-            2: {row: 1, col: 4, dir: 'across', length: 5, answer: 'GANGA'},
-            4: {row: 3, col: 0, dir: 'across', length: 7, answer: 'GERMANY'},
-            7: {row: 6, col: 2, dir: 'across', length: 11, answer: 'BILLUBARBER'},
-            10: {row: 9, col: 1, dir: 'across', length: 10, answer: 'KAVERIAMMA'},
-            13: {row: 12, col: 0, dir: 'across', length: 3, answer: 'JUG'},
-            14: {row: 13, col: 3, dir: 'across', length: 8, answer: 'SAATHIYA'},
-            16: {row: 15, col: 1, dir: 'across', length: 7, answer: 'SHREYAS'},
-            17: {row: 16, col: 5, dir: 'across', length: 3, answer: 'KTV'},
+            2: {row: 1, col: 2, dir: 'across', length: 5, answer: 'GANGA'},
+            4: {row: 3, col: 2, dir: 'across', length: 7, answer: 'GERMANY'},
+            7: {row: 6, col: 0, dir: 'across', length: 11, answer: 'BILLUBARBER'},
+            10: {row: 9, col: 0, dir: 'across', length: 10, answer: 'KAVERIAMMA'},
+            14: {row: 13, col: 4, dir: 'across', length: 8, answer: 'SAATHIYA'},
+            16: {row: 15, col: 2, dir: 'across', length: 7, answer: 'SHREYAS'},
+            17: {row: 16, col: 7, dir: 'across', length: 3, answer: 'KTV'},
             18: {row: 17, col: 2, dir: 'across', length: 5, answer: 'AKIRA'},
-            20: {row: 19, col: 3, dir: 'across', length: 5, answer: 'MANOJ'},
+            20: {row: 19, col: 5, dir: 'across', length: 5, answer: 'MANOJ'},
             21: {row: 20, col: 0, dir: 'across', length: 10, answer: 'CHUNNIBABU'}
             ,
             // Down
             1: {row: 0, col: 2, dir: 'down', length: 6, answer: 'PAHELI'},
-            3: {row: 2, col: 5, dir: 'down', length: 6, answer: 'GREECE'},
-            5: {row: 4, col: 1, dir: 'down', length: 4, answer: 'JUHI'},
-            6: {row: 5, col: 7, dir: 'down', length: 7, answer: 'SAGRIKA'},
-            8: {row: 7, col: 4, dir: 'down', length: 8, answer: 'BAADSHAH'},
-            9: {row: 8, col: 6, dir: 'down', length: 13, answer: 'ONETWOKAFOUR'},
-            11: {row: 10, col: 3, dir: 'down', length: 6, answer: 'ANUPAM'},
-            12: {row: 11, col: 8, dir: 'down', length: 9, answer: 'AMRITARAO'},
-            15: {row: 14, col: 2, dir: 'down', length: 6, answer: 'PRIETY'},
+            3: {row: 2, col: 4, dir: 'down', length: 6, answer: 'GREECE'},
+            5: {row: 4, col: 2, dir: 'down', length: 4, answer: 'JUHI'},
+            6: {row: 5, col: 6, dir: 'down', length: 7, answer: 'SAGRIKA'},
+            8: {row: 7, col: 5, dir: 'down', length: 8, answer: 'BAADSHAH'},
+            9: {row: 8, col: 10, dir: 'down', length: 13, answer: 'ONETWOKAFOUR'},
+            11: {row: 10, col: 5, dir: 'down', length: 6, answer: 'ANUPAM'},
+            12: {row: 11, col: 9, dir: 'down', length: 9, answer: 'AMRITARAO'},
+            15: {row: 14, col: 4, dir: 'down', length: 6, answer: 'PRIETY'},
             19: {row: 18, col: 6, dir: 'down', length: 4, answer: 'AMAN'}
         };
 
