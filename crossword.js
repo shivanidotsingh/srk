@@ -27,7 +27,7 @@ const COLS = grid[0].length;
 // --- CLUES (adjusted to match your grid) ---
 const cluesList = [
   // Across
-  ["AKIRA", "Taani partner actress plays this character in Ladakh (5)"],
+  ["AKIRA", "She meets Samar in Ladakh as a Discovery channel film-maker; character name (5)"],
   ["BAADSHAH", "Film where he throws walnut on mirror to prove he's not in love (8)"],
   ["LONDON", "Maya, aka pooja’s fiancé, lives here (6)"],
   ["JUG", "As this character, he makes a parallel between choosing a kursi and choosing a life partner (3)"],
