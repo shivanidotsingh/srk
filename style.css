@@ -33,12 +33,14 @@ html, body {
 
 .cell {
   width: 32px; height: 32px;
-  text-align: center; font-size: 18px; font-weight: bold;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
   background: #fff;
-  border: 1px solid #bbb; /* Light grid lines */
+  border: 1px solid #bbb;
   outline: none; position: relative;
   box-sizing: border-box;
-  padding: 0 0 0 12px;
+  padding: 0;
   margin: 0;
   text-transform: uppercase;
   caret-color: #1976d2;
@@ -53,14 +55,17 @@ html, body {
 }
 
 .cell-number {
-  position: absolute; top: 2px; left: 4px;
-  font-size: 9px;
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  font-size: 10px;
   color: #555;
   pointer-events: none;
-  font-weight: normal;
+  font-weight: bold;
   user-select: none;
-  z-index: 2;
+  z-index: 10;
   background: transparent;
+  line-height: 1;
 }
 
 .cell.highlight { background: #e3f2fd !important; }
