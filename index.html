@@ -21,12 +21,17 @@
       outline: none; position: relative;
       box-sizing: border-box;
       padding: 0; margin: 0;
+      text-transform: uppercase;
+      caret-color: #1976d2;
+      transition: background 0.15s;
     }
     .cell.block { background: #222; border: 1px solid #222; }
     .cell-number {
       position: absolute; top: 2px; left: 3px;
       font-size: 10px; color: #1976d2; pointer-events: none; font-weight: bold;
     }
+    .cell.highlight { background: #e3f2fd; }
+    .cell.current { background: #bbdefb; }
     .clues { flex: 1; }
     .clues-section { margin-bottom: 25px; }
     .clues-section h3 { margin-bottom: 8px; color: #1976d2; }
@@ -184,23 +189,161 @@ for (let r = 0; r < ROWS; r++) {
       span.textContent = num;
       cell.insertAdjacentElement('afterbegin', span);
     }
+    cell.addEventListener('focus', onCellFocus);
+    cell.addEventListener('keydown', onCellKeyDown);
+    cell.addEventListener('input', onCellInput);
+    cell.addEventListener('click', onCellClick);
   }
 }
 
-// --- RENDER CLUES ---
+// --- UX STATE ---
+let selected = null; // {word, idx, dir}
+let lastCell = null;
+
+// --- CLUE RENDERING AND INTERACTION ---
 function renderClues() {
   const acrossDiv = document.getElementById('acrossClues');
   const downDiv = document.getElementById('downClues');
   acrossDiv.innerHTML = '';
   downDiv.innerHTML = '';
-  across.forEach(w => {
-    acrossDiv.innerHTML += `<div class="clue"><b>${w.num}.</b> ${w.clue}</div>`;
+  across.forEach((w, i) => {
+    const div = document.createElement('div');
+    div.className = 'clue';
+    div.innerHTML = `<b>${w.num}.</b> ${w.clue}`;
+    div.onclick = () => selectWord(w, 0, 'across');
+    acrossDiv.appendChild(div);
   });
-  down.forEach(w => {
-    downDiv.innerHTML += `<div class="clue"><b>${w.num}.</b> ${w.clue}</div>`;
+  down.forEach((w, i) => {
+    const div = document.createElement('div');
+    div.className = 'clue';
+    div.innerHTML = `<b>${w.num}.</b> ${w.clue}`;
+    div.onclick = () => selectWord(w, 0, 'down');
+    downDiv.appendChild(div);
   });
 }
 renderClues();
+
+function clearHighlights() {
+  document.querySelectorAll('.cell').forEach(cell => cell.classList.remove('highlight', 'current'));
+  document.querySelectorAll('.clue').forEach(clue => clue.classList.remove('active'));
+}
+function highlightWord(word, idx, dir) {
+  clearHighlights();
+  for (let i = 0; i < word.answer.length; i++) {
+    let rr = word.row + (dir === 'down' ? i : 0);
+    let cc = word.col + (dir === 'across' ? i : 0);
+    cellRefs[rr][cc].classList.add('highlight');
+  }
+  let rr = word.row + (dir === 'down' ? idx : 0);
+  let cc = word.col + (dir === 'across' ? idx : 0);
+  cellRefs[rr][cc].classList.add('current');
+  // Highlight clue
+  let clues = dir === 'across' ? document.querySelectorAll('#acrossClues .clue') : document.querySelectorAll('#downClues .clue');
+  let clueIdx = (dir === 'across' ? across : down).findIndex(w => w === word);
+  if (clues[clueIdx]) clues[clueIdx].classList.add('active');
+}
+
+function selectWord(word, idx, dir) {
+  selected = {word, idx, dir};
+  highlightWord(word, idx, dir);
+  let rr = word.row + (dir === 'down' ? idx : 0);
+  let cc = word.col + (dir === 'across' ? idx : 0);
+  cellRefs[rr][cc].focus();
+  lastCell = cellRefs[rr][cc];
+}
+
+// --- CELL EVENTS ---
+function onCellFocus(e) {
+  const cell = e.target;
+  const r = +cell.dataset.row, c = +cell.dataset.col;
+  // Find all words at this cell
+  let wordAcross = across.find(w => w.row === r && c >= w.col && c < w.col + w.answer.length);
+  let wordDown = down.find(w => w.col === c && r >= w.row && r < w.row + w.answer.length);
+  let dir = selected && selected.dir === 'down' && wordDown ? 'down' : 'across';
+  let idx = dir === 'across' && wordAcross ? c - wordAcross.col : (wordDown ? r - wordDown.row : 0);
+  let word = dir === 'across' ? wordAcross : wordDown;
+  if (!word) word = wordAcross || wordDown;
+  if (!word) return;
+  selectWord(word, idx, word === wordAcross ? 'across' : 'down');
+  lastCell = cell;
+}
+function onCellClick(e) {
+  const cell = e.target;
+  const r = +cell.dataset.row, c = +cell.dataset.col;
+  // If already selected and clicked again, toggle direction if both available
+  let wordAcross = across.find(w => w.row === r && c >= w.col && c < w.col + w.answer.length);
+  let wordDown = down.find(w => w.col === c && r >= w.row && r < w.row + w.answer.length);
+  if (selected && lastCell === cell && wordAcross && wordDown) {
+    let dir = selected.dir === 'across' ? 'down' : 'across';
+    let word = dir === 'across' ? wordAcross : wordDown;
+    let idx = dir === 'across' ? c - word.col : r - word.row;
+    selectWord(word, idx, dir);
+  }
+  lastCell = cell;
+}
+function onCellInput(e) {
+  const cell = e.target;
+  let val = cell.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0,1);
+  cell.value = val;
+  if (!selected) return;
+  // Move to next cell in word
+  let {word, idx, dir} = selected;
+  let nextIdx = idx + 1;
+  if (nextIdx < word.answer.length) {
+    let rr = word.row + (dir === 'down' ? nextIdx : 0);
+    let cc = word.col + (dir === 'across' ? nextIdx : 0);
+    let nextCell = cellRefs[rr][cc];
+    if (nextCell) {
+      nextCell.focus();
+      selectWord(word, nextIdx, dir);
+    }
+  }
+}
+function onCellKeyDown(e) {
+  if (!selected) return;
+  let {word, idx, dir} = selected;
+  if (e.key === "Backspace") {
+    if (cellRefs[word.row + (dir === 'down' ? idx : 0)][word.col + (dir === 'across' ? idx : 0)].value === "") {
+      if (idx > 0) {
+        let prevIdx = idx - 1;
+        let rr = word.row + (dir === 'down' ? prevIdx : 0);
+        let cc = word.col + (dir === 'across' ? prevIdx : 0);
+        cellRefs[rr][cc].focus();
+        selectWord(word, prevIdx, dir);
+      }
+    }
+  } else if (e.key === "ArrowRight" || (e.key === "Tab" && dir === 'across')) {
+    e.preventDefault();
+    if (dir === 'across' && idx < word.answer.length - 1) {
+      let rr = word.row;
+      let cc = word.col + idx + 1;
+      cellRefs[rr][cc].focus();
+      selectWord(word, idx + 1, dir);
+    }
+  } else if (e.key === "ArrowLeft") {
+    if (dir === 'across' && idx > 0) {
+      let rr = word.row;
+      let cc = word.col + idx - 1;
+      cellRefs[rr][cc].focus();
+      selectWord(word, idx - 1, dir);
+    }
+  } else if (e.key === "ArrowDown" || (e.key === "Tab" && dir === 'down')) {
+    e.preventDefault();
+    if (dir === 'down' && idx < word.answer.length - 1) {
+      let rr = word.row + idx + 1;
+      let cc = word.col;
+      cellRefs[rr][cc].focus();
+      selectWord(word, idx + 1, dir);
+    }
+  } else if (e.key === "ArrowUp") {
+    if (dir === 'down' && idx > 0) {
+      let rr = word.row + idx - 1;
+      let cc = word.col;
+      cellRefs[rr][cc].focus();
+      selectWord(word, idx - 1, dir);
+    }
+  }
+}
 
 // --- CONTROLS ---
 function clearGrid() {
