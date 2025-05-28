@@ -1,52 +1,54 @@
-// --- YOUR UPDATED GRID ---
+// --- YOUR LATEST GRID ---
 const gridText = [
-  ". . . . . . . . . . A K I R A .",
-  ". . . . . . . . . . M . . . N .",
-  ". . . . B A A D S H A H . . U .", 
-  ". . . . I . . . . . N . . . P .",
-  ". . . . L O N D O N . . . . A .",
-  ". . . . L . . . . . . . . . M .",
-  ". . . J U G . . . M A N O J . .", 
+  ". . . . . . . . . . A N U P A M",
+  ". . C . . . . . . . M . . . . .",
+  ". . H . B A A D S H A H . . . .", 
+  ". J U H I . . . . . N . . . . .",
+  ". . N . L O N D O N . . . . . .",
+  ". . N . L . . . . . . . . . . .",
+  ". . I . U . . . . M A N O J . .", 
   ". . . . B . . . . . . . N . . .",
-  ". S . . A . . A . P R I E T Y .",
+  ". S . . A . G . . P R I E T Y .",
   "K A V E R I A M M A . . T . . .",
-  ". A . . B . . R . H . . W . . .",
-  ". T . . E . . I . E . . O . . .",
-  ". H . . R . . T . L . . K T V .",
-  ". I . . . . . A . I . . A . . J",
-  ". Y . G . . . . . . . . F . . U",
-  "S A G A R I K A . . . . O . . H",
-  ". . . N . . . . . . C H U N N I",
-  ". . . G R E E C E . . . R . . .",
-  ". . . A . . . . . . . . . . . ."
+  ". A . . B . N . . H . . W . . .",
+  ". T . . E . G . . E . . O . . .",
+  ". H . . R . A . . L . . K T V .",
+  ". I . . . . . . . I . . A . . .",
+  ". Y . . G . . . . . . . F . . .",
+  "S A G A R I K A . . . . O . . .",
+  ". . . . E . . K . . . . U . . .",
+  ". . . . E . . I . . A M R I T A",
+  ". . . . C . . R . . . . . . .",
+  ". . . . H E Y R A M . . . . . ."
 ];
 const grid = gridText.map(row => row.split(/\s+/));
 const ROWS = grid.length;
 const COLS = grid[0].length;
 
-// --- CLUES (adjusted to match your grid) ---
+// --- CLUES (final, matching your grid) ---
 const cluesList = [
   // Across
-  ["AKIRA", "She meets Samar in Ladakh as a Discovery channel film-maker; character name (5)"],
+  ["ANUPAM", "Actor who plays his father when he's raj, and again when he's kishanlal (6)"],
+  ["CHUNNI", "\"apne hisse ki zindagi toh hum jee chuke______ Babu, (6)"],
   ["BAADSHAH", "Film where he throws walnut on mirror to prove he's not in love (8)"],
-  ["LONDON", "Maya, aka pooja’s fiancé, lives here (6)"],
-  ["JUG", "As this character, he makes a parallel between choosing a kursi and choosing a life partner (3)"],
+  ["JUHI", "When he doesn't end up with anna, this actress makes a cameo at the end (4)"],
+  ["LONDON", "Maya, aka Pooja’s fiancé, lives here (6)"],
   ["MANOJ", "Zaara's fiance; the actor (5)"],
   ["PRIETY", "When he's Amar they almost get married, as Dev they're getting divorced; the actress (6)"],
   ["KAVERIAMMA", "Mohan has come to india after many years for her (6,4)"],
   ["KTV", "As Ajay Bakshi, he works for this channel (3)"],
-  ["SAGARIKA", "Actress who plays preeti sabarwal, and actually married a cricketer IRL (7)"],
-  ["CHUNNI", "\"apne hisse ki zindagi toh hum jee chuke______ Babu, (6)"],
-  ["GREECE", "He follows priya to this country because he didn't want to say 'kaash' (6)"],
+  ["SAGARIKA", "Actress who plays Preeti Sabarwal, and actually married a cricketer IRL (7)"],
+  ["HEYRAM", "His Tamil debut (6)"],
   // Down
   ["AMAN", "As this character he says 'yeh woh geeta nahi hai jiske do gande gande bache hai?' (4)"],
-  ["PAHELI", "Sunil shetty is his absent brother in this film (6)"],
-  ["JUHI", "When he doesn't end up with anna, this actress makes a cameo at the end (4)"],
-  ["BILLUBARBER", "Remake of a Malayalam film, loosely based on Krishna and Sudama (5,6)"],
-  ["ONETWOKAFOUR", "Osaka Moraiya film (3,3,2,4)"],
-  ["AMRITA", "General Bakshi sends him to darjeeling to protect her; the actress (6)"],
-  ["SAATHIYA", "He plays tabu's husband in this film (8)"],
-  ["GANGA", "His 'mehbooba', who shares her name with a river (5)"]
+  ["PAHELI", "Sunil Shetty is his absent brother in this film (6)"],
+  ["BILLUBARBER", "Remake of a Malayalam film, loosely based on krishna and sudama (5,6)"],
+  ["ONETWOKAFOUR", "Osaka moraiya film (3,3,2,4)"],
+  ["AMRITA", "General bakshi sends him to darjeeling to protect her; the actress (6)"],
+  ["SAATHIYA", "He plays Tabu's husband in this film (8)"],
+  ["GANGA", "His 'mehbooba', who shares her name with a river (5)"],
+  ["AKIRA", "She meets Samar in Ladakh as a Discovery channel film-maker; character name (5)"],
+  ["GREECE", "He follows priya to this country because he didn't want to say 'kaash' (6)"]
 ];
 
 // --- AUTO-DETECT WORDS IN GRID ---
@@ -179,11 +181,9 @@ function selectWord(word, idx, dir) {
   lastCell = cellRefs[rr][cc];
 }
 
-// --- CELL EVENTS ---
 function onCellFocus(e) {
   const cell = e.target;
   const r = +cell.dataset.row, c = +cell.dataset.col;
-  // Find all words at this cell
   let wordAcross = across.find(w => w.row === r && c >= w.col && c < w.col + w.answer.length);
   let wordDown = down.find(w => w.col === c && r >= w.row && r < w.row + w.answer.length);
   let dir = selected && selected.dir === 'down' && wordDown ? 'down' : 'across';
@@ -197,7 +197,6 @@ function onCellFocus(e) {
 function onCellClick(e) {
   const cell = e.target;
   const r = +cell.dataset.row, c = +cell.dataset.col;
-  // If already selected and clicked again, toggle direction if both available
   let wordAcross = across.find(w => w.row === r && c >= w.col && c < w.col + w.answer.length);
   let wordDown = down.find(w => w.col === c && r >= w.row && r < w.row + w.answer.length);
   if (selected && lastCell === cell && wordAcross && wordDown) {
@@ -213,7 +212,6 @@ function onCellInput(e) {
   let val = cell.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0,1);
   cell.value = val;
   if (!selected) return;
-  // Move to next cell in word
   let {word, idx, dir} = selected;
   let nextIdx = idx + 1;
   if (nextIdx < word.answer.length) {
