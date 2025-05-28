@@ -32,22 +32,19 @@ html, body {
 }
 
 .cell {
-  width: 32px; height: 32px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
+  width: 32px;
+  height: 32px;
   background: #fff;
   border: 1px solid #bbb;
-  outline: none; position: relative;
   box-sizing: border-box;
-  padding: 0;
+  border-radius: 6px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0;
-  text-transform: uppercase;
-  caret-color: #1976d2;
-  transition: background 0.15s;
-  border-radius: 6px; /* Slightly rounded corners */
+  padding: 0;
 }
-
 .cell.block {
   background: transparent;
   border: none;
@@ -61,12 +58,26 @@ html, body {
   left: 3px;
   font-size: 10px;
   color: #555;
-  pointer-events: none;
   font-weight: bold;
-  user-select: none;
   z-index: 10;
-  background: transparent;
+  pointer-events: none;
+  user-select: none;
   line-height: 1;
+}
+
+.cell-input {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  background: transparent;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+  caret-color: #1976d2;
+  padding: 0;
+  margin: 0;
 }
 
 .cell.highlight { background: #e3f2fd !important; }
@@ -80,6 +91,7 @@ html, body {
   overflow: auto;
   padding-left: 12px;
   padding-right: 12px;
+  align-items: flex-start;
 }
 .clues-section {
   flex: 1 1 50%;
@@ -87,13 +99,49 @@ html, body {
   padding-left: 10px;
   padding-right: 10px;
 }
-.clues-section h3 { margin-bottom: 8px; color: #1976d2; }
-.clue { margin-bottom: 8px; cursor: pointer; border-radius: 4px; padding: 5px 8px; }
+.clues-section h3 {
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0 0 8px 0;
+  color: #1976d2;
+  align-self: flex-start;
+}
+.clue {
+  margin-bottom: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 5px 8px;
+  font-size: 14px;
+}
 .clue.active { background: #1976d2; color: #fff; }
-.controls { margin-top: 25px; text-align: center; }
-.btn { margin: 0 6px; padding: 7px 18px; background: #1976d2; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
-.btn:hover { background: #0d47a1; }
-.status { margin-top: 18px; font-size: 18px; text-align: center; }
+
+.controls {
+  margin-top: 25px;
+  text-align: left;
+}
+.btn {
+  background: none;
+  border: none;
+  color: #1976d2;
+  padding: 0;
+  margin: 0 15px 0 0;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: underline;
+  border-radius: 0;
+  box-shadow: none;
+  transition: color 0.3s ease;
+}
+.btn:hover {
+  color: #0d47a1;
+  background: none;
+  text-decoration: none;
+}
+.status {
+  margin-top: 18px;
+  font-size: 18px;
+  text-align: center;
+}
 
 @media (max-width: 900px) {
   .flex { flex-direction: column; }
