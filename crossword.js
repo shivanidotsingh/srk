@@ -18,9 +18,10 @@ const gridText = [
   "S A G A R I K A . . . . O . . .",
   ". . . . E . . K . . . . U . . .",
   ". . . . E . . I . . A M R I T A",
-  ". . . . C . . R . . . . . . .",
+  ". . . . C . . R . . . . . . . .",
   ". . . . H E Y R A M . . . . . ."
 ];
+
 const grid = gridText.map(row => row.split(/\s+/));
 const ROWS = grid.length;
 const COLS = grid[0].length;
