@@ -28,11 +28,10 @@ const grid = gridText.map(row => row.trim().split(/\s+/));
 const ROWS = 20;
 const COLS = 16;
 
-// --- CLUES (edit as needed to match your grid) ---
 const cluesList = [
   // Across
   ["ANUPAM", "Actor who plays his father when he's Raj, and again when he's Kishanlal (6)"],
-  ["CHUNNI", "\"Apne hisse ki zindagi toh hum jee chuke ______ Babu\" (6)"],
+  ["CHUNNI", "\"Apne hisse ki zindagi toh hum jee chuke______ Babu,\" (6)"],
   ["BAADSHAH", "Film where he throws walnut on mirror to prove he's not in love (8)"],
   ["JUHI", "When he doesn't end up with Anna, this actress makes a cameo at the end (4)"],
   ["LONDON", "Maya, aka Pooja’s fiancé, lives here (6)"],
@@ -98,15 +97,18 @@ const {across, down, numbering} = findWordsAndNumbering();
 
 // --- RENDER GRID ---
 const crossword = document.getElementById('crossword');
+const cellRefs = [];
 for (let r = 0; r < ROWS; r++) {
+  cellRefs[r] = [];
   for (let c = 0; c < COLS; c++) {
     const ch = grid[r][c];
     const cellDiv = document.createElement('div');
     cellDiv.className = 'cell' + (ch === '.' ? ' block' : '');
     cellDiv.style.position = 'relative';
 
+    let input = null;
     if (ch !== ".") {
-      const input = document.createElement('input');
+      input = document.createElement('input');
       input.type = 'text';
       input.maxLength = 1;
       input.className = 'cell-input';
@@ -114,6 +116,12 @@ for (let r = 0; r < ROWS; r++) {
       input.dataset.row = r;
       input.dataset.col = c;
       cellDiv.appendChild(input);
+
+      // Attach events to the input
+      input.addEventListener('focus', onCellFocus);
+      input.addEventListener('keydown', onCellKeyDown);
+      input.addEventListener('input', onCellInput);
+      input.addEventListener('click', onCellClick);
     }
 
     // Add clue number if this cell starts a word
@@ -126,6 +134,7 @@ for (let r = 0; r < ROWS; r++) {
     }
 
     crossword.appendChild(cellDiv);
+    cellRefs[r][c] = input; // store the input, not the cellDiv!
   }
 }
 
@@ -165,11 +174,13 @@ function highlightWord(word, idx, dir) {
   for (let i = 0; i < word.answer.length; i++) {
     let rr = word.row + (dir === 'down' ? i : 0);
     let cc = word.col + (dir === 'across' ? i : 0);
-    cellRefs[rr][cc].classList.add('highlight');
+    const cellDiv = cellRefs[rr][cc]?.parentNode;
+    if (cellDiv) cellDiv.classList.add('highlight');
   }
   let rr = word.row + (dir === 'down' ? idx : 0);
   let cc = word.col + (dir === 'across' ? idx : 0);
-  cellRefs[rr][cc].classList.add('current');
+  const cellDiv = cellRefs[rr][cc]?.parentNode;
+  if (cellDiv) cellDiv.classList.add('current');
   // Highlight clue
   let clues = dir === 'across' ? document.querySelectorAll('#acrossClues .clue') : document.querySelectorAll('#downClues .clue');
   let clueIdx = (dir === 'across' ? across : down).findIndex(w => w === word);
@@ -186,8 +197,8 @@ function selectWord(word, idx, dir) {
 }
 
 function onCellFocus(e) {
-  const cell = e.target;
-  const r = +cell.dataset.row, c = +cell.dataset.col;
+  const input = e.target;
+  const r = +input.dataset.row, c = +input.dataset.col;
   let wordAcross = across.find(w => w.row === r && c >= w.col && c < w.col + w.answer.length);
   let wordDown = down.find(w => w.col === c && r >= w.row && r < w.row + w.answer.length);
   let dir = selected && selected.dir === 'down' && wordDown ? 'down' : 'across';
@@ -196,34 +207,34 @@ function onCellFocus(e) {
   if (!word) word = wordAcross || wordDown;
   if (!word) return;
   selectWord(word, idx, word === wordAcross ? 'across' : 'down');
-  lastCell = cell;
+  lastCell = input;
 }
 function onCellClick(e) {
-  const cell = e.target;
-  const r = +cell.dataset.row, c = +cell.dataset.col;
+  const input = e.target;
+  const r = +input.dataset.row, c = +input.dataset.col;
   let wordAcross = across.find(w => w.row === r && c >= w.col && c < w.col + w.answer.length);
   let wordDown = down.find(w => w.col === c && r >= w.row && r < w.row + w.answer.length);
-  if (selected && lastCell === cell && wordAcross && wordDown) {
+  if (selected && lastCell === input && wordAcross && wordDown) {
     let dir = selected.dir === 'across' ? 'down' : 'across';
     let word = dir === 'across' ? wordAcross : wordDown;
     let idx = dir === 'across' ? c - word.col : r - word.row;
     selectWord(word, idx, dir);
   }
-  lastCell = cell;
+  lastCell = input;
 }
 function onCellInput(e) {
-  const cell = e.target;
-  let val = cell.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0,1);
-  cell.value = val;
+  const input = e.target;
+  let val = input.value.toUpperCase().replace(/[^A-Z]/g, '').slice(0,1);
+  input.value = val;
   if (!selected) return;
   let {word, idx, dir} = selected;
   let nextIdx = idx + 1;
   if (nextIdx < word.answer.length) {
     let rr = word.row + (dir === 'down' ? nextIdx : 0);
     let cc = word.col + (dir === 'across' ? nextIdx : 0);
-    let nextCell = cellRefs[rr][cc];
-    if (nextCell) {
-      nextCell.focus();
+    let nextInput = cellRefs[rr][cc];
+    if (nextInput) {
+      nextInput.focus();
       selectWord(word, nextIdx, dir);
     }
   }
@@ -276,7 +287,7 @@ function onCellKeyDown(e) {
 
 // --- CONTROLS ---
 function clearGrid() {
-  document.querySelectorAll('.cell').forEach(cell => { if (!cell.disabled) cell.value = ''; });
+  document.querySelectorAll('.cell-input').forEach(input => { if (!input.disabled) input.value = ''; });
   document.getElementById('status').textContent = '';
 }
 function checkAnswers() {
