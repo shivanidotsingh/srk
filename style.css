@@ -111,7 +111,7 @@ html, body {
   cursor: pointer;
   border-radius: 4px;
   padding: 5px 8px;
-  font-size: 14px;
+  font-size: 18px;
 }
 .clue.active { background: #1976d2; color: #fff; }
 
