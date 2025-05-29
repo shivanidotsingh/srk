@@ -18,8 +18,9 @@ html, body {
   display: flex;
   flex: 1 1 auto;
   gap: 40px;
-  overflow: hidden;
+  overflow: visible; /* or overflow-y: auto; for vertical scroll */
 }
+
 
 .crossword-grid {
   flex: 2 1 60%;
@@ -152,11 +153,18 @@ html, body {
     gap: 0 !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
+    overflow: visible !important;
   }
-  .crossword-grid, .clues-section {
-    flex: none !important;
+  .clues-section {
+    overflow-y: visible !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .crossword-grid {
     width: 100% !important;
     max-width: 100vw !important;
   }
 }
+
 
