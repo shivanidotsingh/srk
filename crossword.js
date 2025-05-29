@@ -47,10 +47,10 @@ const cluesList = [
   ["BILLUBARBER", "Remake of a Malayalam film, loosely based on Krishna and Sudama (5,6)"],
   ["ONETWOKAFOUR", "Osaka Moraiya film (3,3,2,4)"],
   ["AMRITA", "General Bakshi sends him to Darjeeling to protect her; the actress (6)"],
-  ["SAATHIYA", "He plays Tabu's husband in this film (8)"],
+  ["SAATHIYA", "He plays Tabu's husband in a cameo in this Tamil film's Hindi remake (8)"],
   ["GANGA", "His 'Mehbooba', who shares her name with a river (5)"],
   ["GREECE", "He follows Priya to this country because he didn't want to say 'Kaash' (6)"],
-  ["AKIRA", "Taani partner actress plays this character in Ladakh (5)"]
+  ["AKIRA", "Taani partner actress plays this character in Ladakh; Name is in song 'Jiya Re' (5)"]
 ];
 
 // --- AUTO-DETECT WORDS IN GRID ---
