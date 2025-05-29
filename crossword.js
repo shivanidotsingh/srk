@@ -30,22 +30,22 @@ const COLS = 16;
 
 const cluesList = [
   // Across
-  ["ANUPAM", "Father who he greets with 'O Potchi, O Koka, O Bobi, O Lola.'; the actor (6)"],
-  ["CHUNNI", "\"Apne hisse ki zindagi toh hum jee chuke______ Babu,\" (6)"],
-  ["BAADSHAH", "Film where he throws walnut on mirror to prove he's not in love (8)"],
+  ["ANUPAM", "Father who he greets with 'O Potchi, O Koka, O Bobi, O Lola'; the actor (6)"],
+  ["CHUNNI", "\"Apne hisse ki zindagi toh hum jee chuke ______ Babu\" (6)"],
+  ["BAADSHAH", "Film in which he throws walnut on mirror to prove he's not in love (8)"],
   ["JUHI", "When he doesn't end up with Anna, this actress makes a cameo at the end (4)"],
   ["LONDON", "Maya, aka Pooja’s fiancé, lives here (6)"],
   ["MANOJ", "Zaara's fiancé; the actor (5)"],
   ["PRIETY", "When he's Amar they almost get married, as Dev they're getting divorced; the actress (6)"],
   ["KAVERIAMMA", "Mohan has come to India after many years for her (6,4)"],
   ["KTV", "As Ajay Bakshi, he works for this channel (3)"],
-  ["SAGARIKA", "Actress who plays Preeti Sabarwal, center-forward in the team Kabir is coaching (7)"],
+  ["SAGARIKA", "Actress who plays Preeti Sabarwal, center-forward in Kabir's hockey team (7)"],
   ["HEYRAM", "His Tamil debut (6)"],
   // Down
   ["AMAN", "As this character he says 'Yeh woh Geeta nahi hai jiske do gande gande bache hai?' (4)"],
   ["PAHELI", "Sunil Shetty is his absent brother in this film (6)"],
   ["BILLUBARBER", "Remake of a Malayalam film, loosely based on Krishna and Sudama (5,6)"],
-  ["ONETWOKAFOUR", "Osaka Moraiya movie (3,3,2,4)"],
+  ["ONETWOKAFOUR", "Osaka Moraiya film (3,3,2,4)"],
   ["AMRITA", "General Bakshi sends him to Darjeeling to protect her; the actress (6)"],
   ["SAATHIYA", "He plays Tabu's husband in this film (8)"],
   ["GANGA", "His 'Mehbooba', who shares her name with a river (5)"],
