@@ -10,16 +10,16 @@ const gridText = [
   ". . I . U . . . . M A N O J . .",
   ". . . . B . . . . . . . N . . .",
   ". S . . A . G . . P R I E T Y .",
-  "K A V E R I A M M A . . T . . .",
-  ". A . . B . N . . H . . W . . .",
-  ". T . . E . G . . E . . O . . .",
-  ". H . . R . A . . L . . K T V .",
-  ". I . . . . . . . I . . A . . .",
-  ". Y . . G . . . . . . . F . . .",
+  "K A V E R I A M M A . . T . E .",
+  ". A . . B . N . . H . . W . S .",
+  ". T . . E . G . . E . . O . B .",
+  ". H . . R . A . . L . . K . O .",
+  ". I . . . . . . . I . . A . S .",
+  ". Y . . G . . . . . . . F . S .",
   ". A K I R A . B . . . . O . . .",
-  ". . . . E . . A . . M . U . . .",
+  ". . . . E . . A . . M . U . K .",
   ". . . . E . . U . . A M R I T A",
-  ". . . . C . . U . . X . . . . .",
+  ". . . . C . . U . . X . . . V .",
   ". . . H E Y R A M . . . . . . ."
 ];
 
@@ -38,8 +38,6 @@ const cluesList = [
   ["MANOJ", "Zaara's fiancé; the actor (5)"],
   ["PRIETY", "When he's Amar they almost get married, as Dev they're getting divorced; the actress (6)"],
   ["KAVERIAMMA", "Mohan has come to India after many years for her (6,4)"],
-  ["KTV", "As Ajay Bakshi, he works for this channel (3)"],
-  ["SAGARIKA", "Actress who plays Preeti Sabarwal, center-forward in Kabir's hockey team (7)"],
   ["AKIRA", "Taani partner actress plays this character in Ladakh; Name is in song 'Jiya Re' (5)"],
   ["HEYRAM", "His Tamil debut (6)"],
   // Down
@@ -48,10 +46,12 @@ const cluesList = [
   ["PAHELI", "Sunil Shetty is his absent brother in this film (6)"],
   ["BILLUBARBER", "Remake of a Malayalam film, loosely based on Krishna and Sudama (5,6)"],
   ["ONETWOKAFOUR", "Osaka Moraiya film (3,3,2,4)"],
+  ["YESBOSS", "In a popular song from this film, he's playing the piano on a truck (3,4)"],
   ["AMRITA", "General Bakshi sends him to Darjeeling to protect her; the actress (6)"],
   ["SAATHIYA", "He plays Tabu's husband in a cameo in this Tamil film's Hindi remake (8)"],
   ["GANGA", "His 'Mehbooba', who shares her name with a river (5)"],
   ["MAX", "As this character he plays the twin brother of Shirley Dias (3)"],
+  ["KTV", "As Ajay Bakshi, he works for this channel (3)"],
   ["GREECE", "He follows Priya to this country because he didn't want to say 'Kaash' (6)"],
   ["BAUUA", "Name of his character in Zero (5)"]
 ];
