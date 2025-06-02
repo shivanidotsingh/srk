@@ -1,10 +1,10 @@
 // --- YOUR LATEST 16x20 GRID ---
 // Make sure each row has 16 cells (dots or letters), separated by spaces!
 const gridText = [
-  ". . . . . . . . . . A N U P A M",
-  ". . C . . . . . . . M . . . . .",
+  ". . . . . . . . V . A N U P A M",
+  ". . C . . . . . A . M . . . . .",
   ". . H . B A A D S H A H . . . .",
-  ". J U H I . . . . . N . . . . .",
+  ". J U H I . . . C . N . . . . .",
   ". . N . L O N D O N . . . . . .",
   ". . N . L . . . . . . . . . . .",
   ". . I . U . . . . M A N O J . .",
@@ -16,10 +16,10 @@ const gridText = [
   ". H . . R . A . . L . . K T V .",
   ". I . . . . . . . I . . A . . .",
   ". Y . . G . . . . . . . F . . .",
-  "S A G A R I K A . . . . O . . .",
-  ". . . . E . . K . . . . U . . .",
-  ". . . . E . . I . . A M R I T A",
-  ". . . . C . . R . . . . . . . .",
+  ". A K I R A . B . . . . O . . .",
+  ". . . . E . . A . . M . U . . .",
+  ". . . . E . . U . . A M R I T A",
+  ". . . . C . . U . . X . . . . .",
   ". . . H E Y R A M . . . . . . ."
 ];
 
@@ -40,8 +40,10 @@ const cluesList = [
   ["KAVERIAMMA", "Mohan has come to India after many years for her (6,4)"],
   ["KTV", "As Ajay Bakshi, he works for this channel (3)"],
   ["SAGARIKA", "Actress who plays Preeti Sabarwal, center-forward in Kabir's hockey team (7)"],
+  ["AKIRA", "Taani partner actress plays this character in Ladakh; Name is in song 'Jiya Re' (5)"],
   ["HEYRAM", "His Tamil debut (6)"],
   // Down
+  ["VASCO", "The Bicchhoos and Eagles are gangs in which city of Goa (5)"],
   ["AMAN", "As this character he says 'Yeh woh Geeta nahi hai jiske do gande gande bache hai?' (4)"],
   ["PAHELI", "Sunil Shetty is his absent brother in this film (6)"],
   ["BILLUBARBER", "Remake of a Malayalam film, loosely based on Krishna and Sudama (5,6)"],
@@ -49,8 +51,9 @@ const cluesList = [
   ["AMRITA", "General Bakshi sends him to Darjeeling to protect her; the actress (6)"],
   ["SAATHIYA", "He plays Tabu's husband in a cameo in this Tamil film's Hindi remake (8)"],
   ["GANGA", "His 'Mehbooba', who shares her name with a river (5)"],
+  ["MAX", "As this character he plays the twin brother of Shirley Dias (3)"],
   ["GREECE", "He follows Priya to this country because he didn't want to say 'Kaash' (6)"],
-  ["AKIRA", "Taani partner actress plays this character in Ladakh; Name is in song 'Jiya Re' (5)"]
+  ["BAUUA", "Name of his character in Zero (5)"]
 ];
 
 // --- AUTO-DETECT WORDS IN GRID ---
