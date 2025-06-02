@@ -16,11 +16,11 @@ const gridText = [
   ". H . . R . A . . L . . K . O .",
   ". I . . . . . . . I . . A . S .",
   ". Y . . G . . . . . . . F . S .",
-  ". A K I R A . B . . . . O . . .",
-  ". . . . E . . A . . M . U . K .",
-  ". . . . E . . U . . A M R I T A",
-  ". . . . C . . U . . X . . . V .",
-  ". . . H E Y R A M . . . . . . ."
+  ". A K I R A . G . . . . O . . .",
+  ". . . . E . . E . . D . U . K .",
+  ". . . . E . . R . . A M R I T A",
+  ". . . . C . . U . . R . . . V .",
+  ". . . H E Y R A M . R . . . . ."
 ];
 
 // Parse grid as 16x20
@@ -50,10 +50,10 @@ const cluesList = [
   ["AMRITA", "General Bakshi sends him to Darjeeling to protect her; the actress (6)"],
   ["SAATHIYA", "He plays Tabu's husband in a cameo in this Tamil film's Hindi remake (8)"],
   ["GANGA", "His 'Mehbooba', who shares her name with a river (5)"],
-  ["MAX", "As this character he plays the twin brother of Shirley Dias (3)"],
+  ["DARR", "His only film with Sunny Deol (4)"],
   ["KTV", "As Ajay Bakshi, he works for this channel (3)"],
   ["GREECE", "He follows Priya to this country because he didn't want to say 'Kaash' (6)"],
-  ["BAUUA", "Name of his character in Zero (5)"]
+  ["GERUA", " 🟠 (5)"]
 ];
 
 // --- AUTO-DETECT WORDS IN GRID ---
