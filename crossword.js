@@ -17,9 +17,9 @@ const gridText = [
   ". I . . . . . . . I . G A N G A",
   ". Y . . G . . . . . . . F . . .",
   ". A K I R A . G . . . . O . . .",
-  ". . T . E . . E . . D . U . . .",
-  ". . V . E . . R . . A M R I T A",
-  ". . . . C . . U . . R . . . . .",
+  ". . . . E . . E . . D . U . K .",
+  ". . . . E . . R . . A M R I T A",
+  ". . . . C . . U . . R . . . V .",
   ". . . H E Y R A M . R . . . . ."
 ];
 
@@ -52,10 +52,10 @@ const cluesList = [
   ["BILLUBARBER", "Remake of a Malayalam film, loosely based on Krishna and Sudama (5,6)"],
   ["ONETWOKAFOUR", "Osaka Moraiya film (3,3,2,4)"],
   ["SAATHIYA", "He plays Tabu's husband in a cameo in this Tamil film's Hindi remake (8)"],
-  ["KTV", "As Ajay Bakshi, he works for this channel (3)"],
   ["GREECE", "He follows Priya to this country because he didn't want to say 'Kaash' (6)"],
   ["GERUA", " 🟠 (5)"],
-  ["DARR", "His only film with Sunny Deol (4)"]
+  ["DARR", "His only film with Sunny Deol (4)"],
+  ["KTV", "As Ajay Bakshi, he works for this channel (3)"]
 ];
 
 // --- AUTO-DETECT WORDS IN GRID ---
