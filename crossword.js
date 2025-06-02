@@ -4,22 +4,22 @@ const gridText = [
   ". . . . . . . . V . A N U P A M",
   ". . C . . . . . A . M . . . . A",
   ". . H . B A A D S H A H . . . N",
-  ". J U H I . . . C . N . . . . O",
+  ". J U H I . . . C . N . Z E R O",
   ". . N . L O N D O N . . . . . J",
   ". . N . L . . . . . . . . . . .",
-  ". . I . U . . . . Z E R O . . .",
+  ". . I . U . . . Y E S B O S S .",
   ". . . . B . . . . . . . N . . .",
   ". S . . A . G . . P R I E T Y .",
-  "K A V E R I A M M A . . T . E .",
-  ". A . . B . N . . H . . W . S .",
-  ". T . . E . G . . E . . O . B .",
-  ". H . . R . A . . L . . K . O .",
-  ". I . . . . . . . I . . A . S .",
-  ". Y . . G . . . . . . . F . S .",
+  "K A V E R I A M M A . . T . . .",
+  ". A . . B . N . . H . . W . . .",
+  ". T . . E . G . . E . . O . . .",
+  ". H . . R . A . . L . . K T V .",
+  ". I . . . . . . . I . . A . . .",
+  ". Y . . G . . . . . . . F . . .",
   ". A K I R A . G . . . . O . . .",
-  ". . . . E . . E . . D . U . K .",
+  ". . . . E . . E . . D . U . . .",
   ". . . . E . . R . . A M R I T A",
-  ". . . . C . . U . . R . . . V .",
+  ". . . . C . . U . . R . . . . .",
   ". . . H E Y R A M . R . . . . ."
 ];
 
@@ -31,30 +31,30 @@ const COLS = 16;
 const cluesList = [
   // Across
   ["ANUPAM", "Father who he greets with 'O Potchi, O Koka, O Bobi, O Lola'; the actor (6)"],
-  ["CHUNNI", "\"Apne hisse ki zindagi toh hum jee chuke ______ Babu\" (6)"],
   ["BAADSHAH", "Film in which he throws walnut on mirror to prove he's not in love (8)"],
   ["JUHI", "When he doesn't end up with Anna, this actress makes a cameo at the end (4)"],
   ["LONDON", "Maya, aka Pooja’s fiancé, lives here (6)"],
+  ["YESBOSS", "In a popular song from this film, he's playing the piano on a truck (3,4)"],
   ["HEYRAM", "In this film he plays Bauua from Meerut (4)"],
   ["PRIETY", "When he's Amar they almost get married, as Dev they're getting divorced; the actress (6)"],
+  ["KTV", "As Ajay Bakshi, he works for this channel (3)"],
   ["KAVERIAMMA", "Mohan has come to India after many years for her (6,4)"],
   ["AKIRA", "Taani partner actress plays this character in Ladakh; Name is in song 'Jiya Re' (5)"],
   ["AMRITA", "General Bakshi sends him to Darjeeling to protect her; the actress (6)"],
   ["HEYRAM", "His Tamil debut (6)"],
   // Down
+  ["CHUNNI", "\"Apne hisse ki zindagi toh hum jee chuke ______ Babu\" (6)"],
   ["VASCO", "The Bicchhoos and Eagles are gangs in which city of Goa (5)"],
   ["AMAN", "As this character he says 'Yeh woh Geeta nahi hai jiske do gande gande bache hai?' (4)"],
   ["MANOJ", "Zaara's fiancé; the actor (5)"],
   ["PAHELI", "Sunil Shetty is his absent brother in this film (6)"],
   ["BILLUBARBER", "Remake of a Malayalam film, loosely based on Krishna and Sudama (5,6)"],
   ["ONETWOKAFOUR", "Osaka Moraiya film (3,3,2,4)"],
-  ["YESBOSS", "In a popular song from this film, he's playing the piano on a truck (3,4)"],
   ["SAATHIYA", "He plays Tabu's husband in a cameo in this Tamil film's Hindi remake (8)"],
   ["GANGA", "His 'Mehbooba', who shares her name with a river (5)"],
-  ["DARR", "His only film with Sunny Deol (4)"],
-  ["KTV", "As Ajay Bakshi, he works for this channel (3)"],
   ["GREECE", "He follows Priya to this country because he didn't want to say 'Kaash' (6)"],
-  ["GERUA", " 🟠 (5)"]
+  ["GERUA", " 🟠 (5)"],
+  ["DARR", "His only film with Sunny Deol (4)"]
 ];
 
 // --- AUTO-DETECT WORDS IN GRID ---
