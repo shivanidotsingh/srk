@@ -1,170 +1,93 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background: white;
-  font-family: Arial, sans-serif;
-}
-
+/* Container padding for breathing room */
 .container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  padding: 20px;
-  box-sizing: border-box;
+  padding-left: 40px;
+  padding-right: 40px;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
-.flex {
-  display: flex;
-  flex: 1 1 auto;
-  gap: 40px;
-  overflow: visible; /* or overflow-y: auto; for vertical scroll */
-}
-
-
+/* Crossword grid styling */
 .crossword-grid {
-  flex: 2 1 60%;
-  overflow: auto;
   display: grid;
-  grid-template-columns: repeat(16, 32px);
-  grid-template-rows: repeat(20, 32px);
-  background: transparent;
-  border: none;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  grid-gap: 2px;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  background: white;
+  padding: 10px;
 }
 
-.cell {
-  width: 32px;
-  height: 32px;
-  background: #fff;
-  border: 1px solid #bbb;
-  box-sizing: border-box;
-  border-radius: 6px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-}
-.cell.block {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  pointer-events: none;
-}
-
-.cell-number {
-  position: absolute;
-  top: 2px;
-  left: 3px;
-  font-size: 10px;
-  color: #555;
-  font-weight: bold;
-  z-index: 10;
-  pointer-events: none;
-  user-select: none;
-  line-height: 1;
-}
-
+/* Each cell input */
 .cell-input {
   width: 100%;
-  height: 100%;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  background: transparent;
-  border: none;
-  outline: none;
-  text-transform: uppercase;
-  caret-color: #1976d2;
-  padding: 0;
-  margin: 0;
-}
-
-.cell.highlight { background: #e3f2fd !important; }
-.cell.current { background: #bbdefb !important; }
-
-.clues {
-  flex: 1 1 28%;
-  display: flex;
-  flex-direction: row;
-  gap: 32px;
-  overflow: auto;
-  padding-left: 12px;
-  padding-right: 12px;
-  align-items: flex-start;
-}
-.clues-section {
-  flex: 1 1 50%;
-  overflow-y: auto;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-.clues-section h3 {
-  font-size: 14px;
+  height: 30px;
+  font-size: 14px;       /* Smaller text size */
   font-weight: normal;
-  margin: 0 0 8px 0;
-  color: #1976d2;
-  align-self: flex-start;
-}
-.clue {
-  margin-bottom: 8px;
-  cursor: pointer;
-  border-radius: 4px;
-  padding: 5px 8px;
-  font-size: 18px;
-}
-.clue.active { background: #1976d2; color: #fff; }
-
-.controls {
-  margin-top: 25px;
-  text-align: left;
-}
-.btn {
-  background: none;
-  border: none;
-  color: #1976d2;
-  padding: 0;
-  margin: 0 15px 0 0;
-  font-size: 16px;
-  cursor: pointer;
-  text-decoration: underline;
-  border-radius: 0;
-  box-shadow: none;
-  transition: color 0.3s ease;
-}
-.btn:hover {
-  color: #0d47a1;
-  background: none;
-  text-decoration: none;
-}
-.status {
-  margin-top: 18px;
-  font-size: 18px;
   text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline-offset: 2px;
+  font-family: Helvetica, Arial, sans-serif;
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease-in-out;
 }
 
-@media (max-width: 900px) {
-  .flex {
-    flex-direction: column !important;
-  }
-  .clues {
-    flex-direction: column !important;
-    gap: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    overflow: visible !important;
-  }
-  .clues-section {
-    overflow-y: visible !important;
-    width: 100% !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  .crossword-grid {
-    width: 100% !important;
-    max-width: 100vw !important;
-  }
+/* Empty cells or black cells (non-input) */
+.cell-black {
+  background-color: black;
+  border-radius: 4px;
 }
 
+/* Input focus */
+.cell-input:focus {
+  border-color: #333;
+  outline: none;
+  background: #fafafa;
+}
 
+/* Clues section styling */
+.clues-section {
+  margin-top: 25px;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #444;
+}
+
+.clues-section h3 {
+  font-size: 14px;     /* Smaller header font size */
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.clue {
+  font-size: 14px;    /* Smaller clue text */
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+/* Highlight currently selected clue */
+.clue.selected {
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  padding: 2px 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 100%;
+  }
+
+  .cell-input {
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .clues-section h3, .clue {
+    font-size: 12px;
+  }
+}
