@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>✨ it's a shahukh khan world ✨</title>
+  <title>Rahul, naam toh suna hoga</title>
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -10,7 +10,12 @@
 <body>
 <div class="container">
   <div class="flex">
-    <div>
+    <div class="clues-section">
+      <h3>Across</h3>
+      <div id="acrossClues"></div>
+    </div>
+
+    <div class="grid-container">
       <div class="crossword-grid" id="crossword"></div>
       <div class="controls">
         <button class="btn" onclick="clearGrid()">Clear</button>
@@ -18,15 +23,10 @@
       </div>
       <div class="status" id="status"></div>
     </div>
-    <div class="clues">
-      <div class="clues-section">
-        <h3>Across</h3>
-        <div id="acrossClues"></div>
-      </div>
-      <div class="clues-section">
-        <h3>Down</h3>
-        <div id="downClues"></div>
-      </div>
+
+    <div class="clues-section">
+      <h3>Down</h3>
+      <div id="downClues"></div>
     </div>
   </div>
 </div>
