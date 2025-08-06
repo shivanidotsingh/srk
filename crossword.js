@@ -189,7 +189,10 @@ function highlightWord(word, idx, dir) {
   // Highlight clue
   let clues = dir === 'across' ? document.querySelectorAll('#acrossClues .clue') : document.querySelectorAll('#downClues .clue');
   let clueIdx = (dir === 'across' ? across : down).findIndex(w => w === word);
-  if (clues[clueIdx]) clues[clueIdx].classList.add('active');
+  if (clues[clueIdx]) {
+    clues[clueIdx].classList.add('active');
+    clues[clueIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 }
 
 function selectWord(word, idx, dir) {
@@ -257,9 +260,9 @@ function onCellKeyDown(e) {
         selectWord(word, prevIdx, dir);
       }
     }
-  } else if (e.key === "ArrowRight" || (e.key === "Tab" && dir === 'across')) {
-    e.preventDefault();
+  } else if (e.key === "ArrowRight") {
     if (dir === 'across' && idx < word.answer.length - 1) {
+      e.preventDefault();
       let rr = word.row;
       let cc = word.col + idx + 1;
       cellRefs[rr][cc].focus();
@@ -267,14 +270,15 @@ function onCellKeyDown(e) {
     }
   } else if (e.key === "ArrowLeft") {
     if (dir === 'across' && idx > 0) {
+      e.preventDefault();
       let rr = word.row;
       let cc = word.col + idx - 1;
       cellRefs[rr][cc].focus();
       selectWord(word, idx - 1, dir);
     }
-  } else if (e.key === "ArrowDown" || (e.key === "Tab" && dir === 'down')) {
-    e.preventDefault();
+  } else if (e.key === "ArrowDown") {
     if (dir === 'down' && idx < word.answer.length - 1) {
+      e.preventDefault();
       let rr = word.row + idx + 1;
       let cc = word.col;
       cellRefs[rr][cc].focus();
@@ -282,10 +286,27 @@ function onCellKeyDown(e) {
     }
   } else if (e.key === "ArrowUp") {
     if (dir === 'down' && idx > 0) {
+      e.preventDefault();
       let rr = word.row + idx - 1;
       let cc = word.col;
       cellRefs[rr][cc].focus();
       selectWord(word, idx - 1, dir);
+    }
+  } else if (e.key === "Enter") { // MODIFIED: Added Enter key functionality
+    e.preventDefault();
+    let currentList = dir === 'across' ? across : down;
+    let nextList = dir === 'across' ? down : across;
+    let nextDir = dir === 'across' ? 'down' : 'across';
+    let currentIndex = currentList.findIndex(w => w.num === word.num);
+
+    if (currentIndex < currentList.length - 1) {
+      // Go to next word in the same direction
+      let nextWord = currentList[currentIndex + 1];
+      selectWord(nextWord, 0, dir);
+    } else {
+      // Switch to the first word of the other direction
+      let nextWord = nextList[0];
+      selectWord(nextWord, 0, nextDir);
     }
   }
 }
