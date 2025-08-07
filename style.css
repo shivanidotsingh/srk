@@ -8,10 +8,6 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  background-image: url('https://i.pinimg.com/736x/b0/0a/d5/b00ad5c2914f47b40ac8999345e93664.jpg');
-  background-repeat: repeat;
-  background-attachment: scroll;
   background-color: #f0f2f5;
 }
 
