@@ -9,8 +9,9 @@ html, body {
   justify-content: center;
   align-items: center;
   
-  background-image: url('https://i.pinimg.com/736x/ef/48/9b/ef489b76cc8bea739dadacd20dd7ba77.jpg');
-  background-repeat: none;
+  background-image: url('https://i.pinimg.com/1200x/a5/0c/02/a50c02a2bcddd03978db31cc1ac6d283.jpg');
+  background-repeat: no-repeat;
+  background-position: left center;
   background-color: #f0f2f5;
 }
 
